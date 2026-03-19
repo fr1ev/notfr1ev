@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name | Portfolio</title>
+  <meta name="description" content="Personal portfolio and links" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-2: #0b1023;
+      --card: rgba(20, 28, 61, 0.72);
+      --stroke: rgba(121, 144, 255, 0.24);
+      --text: #eef2ff;
+      --muted: #a8b1d8;
+      --accent: #7c8cff;
+      --accent-2: #4de2c5;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --radius: 22px;
+      --max: 1080px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 15%, rgba(91, 111, 255, 0.18), transparent 24%),
+        radial-gradient(circle at 85% 55%, rgba(153, 98, 255, 0.14), transparent 22%),
+        linear-gradient(180deg, #04070f 0%, #050816 45%, #03060f 100%);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .section { padding: 28px 0; }
+
+    .hero-wrap {
+      padding: 54px 0 24px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 22px;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(15, 21, 46, 0.92), rgba(10, 15, 36, 0.9));
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      backdrop-filter: blur(12px);
+    }
+
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(124, 140, 255, 0.35);
+      box-shadow: 0 0 0 6px rgba(124, 140, 255, 0.08);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(28px, 4vw, 42px); }
+
+    .subtitle {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .desc {
+      margin-top: 12px;
+      color: #c6ceef;
+      line-height: 1.65;
+      max-width: 780px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border-radius: 12px;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 14px;
+      border: 1px solid rgba(124, 140, 255, 0.28);
+      background: rgba(124, 140, 255, 0.12);
+      transition: .2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: rgba(124, 140, 255, 0.2);
+      box-shadow: 0 12px 28px rgba(89, 104, 255, 0.18);
+    }
+
+    .btn.primary {
+      background: linear-gradient(90deg, var(--accent), #93a2ff);
+      color: #0a1027;
+      border: none;
+    }
+
+    .section-title {
+      font-size: clamp(24px, 3vw, 34px);
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 760px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(23, 31, 68, 0.9), rgba(17, 24, 52, 0.9));
+      border: 1px solid var(--stroke);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    .project img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--stroke);
+    }
+
+    .project-body {
+      padding: 18px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #dce2ff;
+      background: rgba(124, 140, 255, 0.12);
+      border: 1px solid rgba(124, 140, 255, 0.18);
+    }
+
+    .status {
+      margin: 14px 0 10px;
+      font-size: 13px;
+      color: #d6dcff;
+      font-weight: 700;
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      width: 78%;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
+    }
+
+    footer {
+      padding: 40px 0 54px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .avatar {
+        margin: 0 auto;
+      }
+
+      .btn-row {
+        justify-content: center;
+      }
+
+      .grid-2, .projects {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container hero-wrap">
+    <section class="hero">
+      <img class="avatar" src="https://via.placeholder.com/200x200.png?text=You" alt="Profile photo">
+      <div>
+        <h1>Your Name</h1>
+        <p class="subtitle">Developer • Designer • Creator</p>
+        <p class="desc">
+          I build projects, communities, bots, websites, and systems. This site is my personal hub where people can find my links, projects, and contact info.
+        </p>
+        <div class="btn-row">
+          <a class="btn primary" href="https://discord.gg/yourinvite" target="_blank">Discord Server</a>
+          <a class="btn" href="#projects">Projects</a>
+          <a class="btn" href="mailto:you@example.com">Contact</a>
+          <a class="btn" href="https://github.com/yourusername" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <main class="container">
+    <section class="section">
+      <h2 class="section-title">What I Do</h2>
+      <p class="section-subtitle">Change these cards to match what you actually do.</p>
+      <div class="grid-2">
+        <article class="card">
+          <h3>Websites</h3>
+          <p>I make modern websites, landing pages, profile hubs, and community pages.</p>
+        </article>
+        <article class="card">
+          <h3>Discord Projects</h3>
+          <p>I build Discord bots, setup systems, moderation tools, and automation.</p>
+        </article>
+        <article class="card">
+          <h3>Graphics & Branding</h3>
+          <p>I work on profile branding, icons, banners, and polished online presence.</p>
+        </article>
+        <article class="card">
+          <h3>Custom Services</h3>
+          <p>I can showcase stores, commissions, links, social media, and featured work.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <h2 class="section-title">Selected Projects</h2>
+      <p class="section-subtitle">Replace these with your own projects, games, stores, servers, or anything you want to show.</p>
+      <div class="projects">
+        <article class="card project">
+          <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80" alt="Project 1">
+          <div class="project-body">
+            <h3>My Main Project</h3>
+            <p class="subtitle">Ongoing</p>
+            <div class="tags">
+              <span class="tag">Website</span>
+              <span class="tag">Community</span>
+              <span class="tag">Tools</span>
+            </div>
+            <p>This is where you write a short description of what this project is and why it matters.</p>
+            <div class="status">Status: Active</div>
+            <div class="bar"><span></span></div>
+            <a class="btn" href="#">Open Project</a>
+          </div>
+        </article>
+
+        <article class="card project">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Project 2">
+          <div class="project-body">
+            <h3>Second Project</h3>
+            <p class="subtitle">Completed</p>
+            <div class="tags">
+              <span class="tag">Bot</span>
+              <span class="tag">GitHub</span>
+              <span class="tag">Portfolio</span>
+            </div>
+            <p>Show another project here like a Discord server, a GitHub repo, or a service page.</p>
+            <div class="status">Status: Finished</div>
+            <div class="bar"><span style="width:100%"></span></div>
+            <a class="btn" href="#">View Details</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 fr1ev. Built with HTML/CSS and hosted on GitHub Pages.
+  </footer>
+</body>
+</html>
