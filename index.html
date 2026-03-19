@@ -4,96 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fr1ev | Portfolio</title>
-  <meta name="description" content="Personal portfolio and links" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #050816;
-      --card: rgba(20, 28, 61, 0.72);
-      --stroke: rgba(121, 144, 255, 0.24);
-      --text: #eef2ff;
-      --muted: #a8b1d8;
-      --accent: #7c8cff;
-      --accent-2: #4de2c5;
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-      --radius: 22px;
-      --max: 1080px;
-    }
 
-    * { box-sizing: border-box; }
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      color: var(--text);
-      background: linear-gradient(180deg, #04070f, #050816);
+      background: #050816;
+      color: white;
     }
 
     .container {
-      width: min(var(--max), calc(100% - 32px));
-      margin: 0 auto;
+      width: 90%;
+      max-width: 900px;
+      margin: 40px auto;
     }
 
     .hero {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 22px;
+      display: flex;
+      gap: 20px;
       align-items: center;
-      background: rgba(15, 21, 46, 0.9);
-      border-radius: var(--radius);
-      padding: 22px;
-      margin-top: 40px;
+      background: #0f152e;
+      padding: 20px;
+      border-radius: 16px;
     }
 
     .avatar {
-      width: 96px;
-      height: 96px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--accent);
-    }
-
-    h1 { font-size: 36px; margin: 0; }
-
-    .subtitle {
-      margin-top: 6px;
-      color: var(--muted);
-    }
-
-    .desc {
-      margin-top: 10px;
-      color: #c6ceef;
-    }
-
-    .btn-row {
-      margin-top: 15px;
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
     }
 
     .btn {
-      padding: 10px 14px;
-      border-radius: 10px;
+      padding: 8px 12px;
+      background: #7c8cff;
+      border-radius: 8px;
       text-decoration: none;
-      color: white;
-      background: rgba(124, 140, 255, 0.2);
-    }
-
-    .btn.primary {
-      background: var(--accent);
       color: black;
       font-weight: bold;
-    }
-
-    .projects {
-      margin-top: 40px;
+      margin-right: 8px;
     }
 
     .project {
-      margin-bottom: 20px;
-      background: var(--card);
+      margin-top: 30px;
+      background: #0f152e;
       padding: 15px;
       border-radius: 12px;
     }
@@ -105,37 +61,42 @@
 
     footer {
       text-align: center;
-      margin: 40px 0;
-      color: var(--muted);
+      margin-top: 40px;
+      color: #aaa;
     }
   </style>
 </head>
+
 <body>
 
 <div class="container">
+
+  <!-- TOP CARD -->
   <div class="hero">
-    <!-- FIXED IMAGE -->
-    <img class="avatar" src="./anime%20pfp.png" alt="Profile">
+    <!-- YOUR PFP ONLY HERE -->
+    <img class="avatar" src="./anime%20pfp.png" alt="pfp">
 
     <div>
       <h1>fr1ev</h1>
-      <p class="subtitle">Discord bot developer • creator</p>
-      <p class="desc">I build bots, servers, and projects. This is my main hub.</p>
+      <p>Discord bot developer • creator</p>
 
-      <div class="btn-row">
-        <a class="btn primary" href="https://discord.gg/Bd7fEsTHNJ" target="_blank">Discord</a>
+      <div>
+        <a class="btn" href="https://discord.gg/Bd7fEsTHNJ" target="_blank">Discord</a>
         <a class="btn" href="https://github.com/fr1ev" target="_blank">GitHub</a>
       </div>
     </div>
   </div>
 
-  <div class="projects">
-    <div class="project">
-      <h3>FR1EV Security</h3>
-      <img src="./anime%20pfp.png">
-      <p>Advanced Discord moderation & protection bot.</p>
-    </div>
+  <!-- PROJECT -->
+  <div class="project">
+    <h2>FR1EV Security</h2>
+
+    <!-- KEEP THIS IMAGE NORMAL -->
+    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80">
+
+    <p>Advanced Discord moderation & protection bot.</p>
   </div>
+
 </div>
 
 <footer>
