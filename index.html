@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fr1ev | Portfolio</title>
   <meta name="description" content="fr1ev portfolio and links" />
+  <link rel="icon" href="./favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,7 +22,7 @@
       --max: 1080px;
       --panel: linear-gradient(180deg, rgba(15, 21, 46, 0.92), rgba(10, 15, 36, 0.9));
       --panel-2: linear-gradient(180deg, rgba(23, 31, 68, 0.9), rgba(17, 24, 52, 0.9));
-      --discord-bg: #11162d;
+      --discord-bg: #0b1023;
     }
 
     * { box-sizing: border-box; }
@@ -81,38 +82,37 @@
 
     .status-badge {
       position: absolute;
-      right: 8px;
-      bottom: 2px;
-      width: 28px;
-      height: 28px;
-      border: 5px solid var(--discord-bg);
-      box-shadow: 0 0 0 3px rgba(124, 140, 255, 0.08);
+      right: 6px;
+      bottom: 6px;
+      width: 24px;
+      height: 24px;
+      border: 4px solid var(--discord-bg);
+      border-radius: 50%;
       background: #80848e;
+      box-shadow: 0 0 0 3px rgba(124, 140, 255, 0.08);
+      z-index: 5;
     }
 
     .status-badge.online {
-      border-radius: 50%;
       background: #23a55a;
     }
 
     .status-badge.idle {
-      border-radius: 50%;
       background: #f0b232;
     }
 
     .status-badge.idle::after {
       content: "";
       position: absolute;
-      top: 3px;
-      right: 3px;
-      width: 12px;
-      height: 12px;
+      top: 2px;
+      right: 2px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: var(--discord-bg);
     }
 
     .status-badge.dnd {
-      border-radius: 50%;
       background: #f23f43;
     }
 
@@ -121,7 +121,7 @@
       position: absolute;
       left: 50%;
       top: 50%;
-      width: 12px;
+      width: 10px;
       height: 4px;
       border-radius: 999px;
       background: white;
@@ -129,36 +129,31 @@
     }
 
     .status-badge.offline {
-      border-radius: 50%;
       background: #80848e;
     }
 
     .status-badge.offline::after {
       content: "";
       position: absolute;
-      inset: 5px;
+      inset: 4px;
       border-radius: 50%;
       background: var(--discord-bg);
     }
 
     .status-badge.mobile {
-      width: 26px;
-      height: 32px;
-      right: 8px;
-      bottom: 0;
-      border-radius: 9px;
+      width: 22px;
+      height: 28px;
+      border-radius: 8px;
       background: #23a55a;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 12px;
       color: white;
-      font-size: 14px;
-      line-height: 1;
     }
 
     .status-badge.mobile::after {
       content: "📱";
-      transform: translateY(-1px);
     }
 
     h1, h2, h3, p { margin: 0; }
@@ -335,32 +330,6 @@
       gap: 12px;
     }
 
-    .presence-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(124, 140, 255, 0.1);
-      border: 1px solid rgba(124, 140, 255, 0.22);
-      color: #dce2ff;
-      font-size: 13px;
-      font-weight: 700;
-      width: fit-content;
-    }
-
-    .presence-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #747f8d;
-    }
-
-    .presence-dot.online { background: #23a55a; }
-    .presence-dot.idle { background: #f0b232; }
-    .presence-dot.dnd { background: #f23f43; }
-    .presence-dot.offline { background: #747f8d; }
-
     .activity-box {
       margin-top: 4px;
       padding: 14px;
@@ -449,7 +418,7 @@
     .grid-2 {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      gap: 18px;
     }
 
     .card {
@@ -487,6 +456,7 @@
       object-fit: cover;
       display: block;
       border-bottom: 1px solid var(--stroke);
+      background: #0f152e;
     }
 
     .project-body {
@@ -554,7 +524,6 @@
         justify-content: center;
       }
 
-      .presence-pill,
       .custom-status-pill {
         margin-left: auto;
         margin-right: auto;
@@ -626,10 +595,13 @@
         </div>
 
         <div class="presence-card">
-  <div class="activity-box">
-    <div id="activity-content" class="activity-empty">Loading current activity...</div>
+          <div class="activity-box">
+            <div id="activity-content" class="activity-empty">Loading current activity...</div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
-</div>
 
   <main class="container">
     <section class="section">
@@ -677,19 +649,19 @@
         </article>
 
         <article class="card project">
-          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="Project 2">
+          <img src="./favicon.ico" alt="Fr1ev security">
           <div class="project-body">
-            <h3>Second Project</h3>
-            <p class="subtitle">Completed</p>
+            <h3>Fr1ev security</h3>
+            <p class="subtitle">Ongoing</p>
             <div class="tags">
+              <span class="tag">Security</span>
+              <span class="tag">Discord</span>
               <span class="tag">Bot</span>
-              <span class="tag">GitHub</span>
-              <span class="tag">Portfolio</span>
             </div>
-            <p>Show another project here like a Discord server, a GitHub repo, or a service page.</p>
-            <div class="status">Status: Finished</div>
-            <div class="bar"><span style="width:100%"></span></div>
-            <a class="btn" href="#">View Details</a>
+            <p>Advanced moderation, protection, and automation tools focused on keeping Discord servers safe, organized, and easy to manage.</p>
+            <div class="status">Status: Active development</div>
+            <div class="bar"><span style="width: 92%"></span></div>
+            <a class="btn" href="https://fr1ev.github.io/fr1ev-security/" target="_blank" rel="noopener noreferrer">View Details</a>
           </div>
         </article>
       </div>
@@ -704,8 +676,6 @@
     const DISCORD_USER_ID = "1172933780705648673";
 
     const heroStatusBadge = document.getElementById("hero-status-badge");
-    const presenceDot = document.getElementById("presence-dot");
-    const presenceText = document.getElementById("presence-text");
     const activityContent = document.getElementById("activity-content");
     const displayName = document.getElementById("display-name");
     const usernameLine = document.getElementById("username-line");
@@ -733,20 +703,19 @@
 
     function setStatus(status, onMobile) {
       const normalized = status || "offline";
-
       heroStatusBadge.className = "status-badge";
-      presenceDot.className = "presence-dot";
 
       if (onMobile && normalized === "online") {
         heroStatusBadge.classList.add("mobile");
         heroStatusBadge.title = "Online on mobile";
-        presenceDot.classList.add("online");
-        presenceText.textContent = "Online on mobile";
         return;
       }
 
-      heroStatusBadge.classList.add(normalized);
-      presenceDot.classList.add(normalized);
+      if (["online", "idle", "dnd", "offline"].includes(normalized)) {
+        heroStatusBadge.classList.add(normalized);
+      } else {
+        heroStatusBadge.classList.add("offline");
+      }
 
       const labelMap = {
         online: "Online",
@@ -755,9 +724,7 @@
         offline: "Offline"
       };
 
-      const label = labelMap[normalized] || "Offline";
-      heroStatusBadge.title = label;
-      presenceText.textContent = label;
+      heroStatusBadge.title = labelMap[normalized] || "Offline";
     }
 
     function getCustomStatus(activities) {
