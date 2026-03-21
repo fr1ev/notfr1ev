@@ -11,7 +11,6 @@
   <style>
     :root {
       --bg: #050816;
-      --bg-2: #0b1023;
       --card: rgba(20, 28, 61, 0.72);
       --stroke: rgba(121, 144, 255, 0.24);
       --text: #eef2ff;
@@ -25,6 +24,7 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
@@ -49,9 +49,9 @@
 
     .hero {
       display: grid;
-      grid-template-columns: 110px 1fr;
+      grid-template-columns: 120px 1fr;
       gap: 22px;
-      align-items: center;
+      align-items: start;
       background: linear-gradient(180deg, rgba(15, 21, 46, 0.92), rgba(10, 15, 36, 0.9));
       border: 1px solid var(--stroke);
       border-radius: var(--radius);
@@ -60,10 +60,10 @@
       backdrop-filter: blur(12px);
     }
 
-    .avatar-wrap {
+    .avatar-column {
       position: relative;
-      width: 96px;
-      height: 96px;
+      width: 110px;
+      min-height: 110px;
     }
 
     .avatar {
@@ -76,54 +76,87 @@
       display: block;
     }
 
+    /* Vencord-like status badge */
     .status-badge {
       position: absolute;
-      right: -2px;
-      bottom: -2px;
+      right: 8px;
+      bottom: 2px;
       width: 28px;
       height: 28px;
+      border: 5px solid #11162d;
+      box-shadow: 0 0 0 3px rgba(124, 140, 255, 0.08);
+      background: #80848e;
+    }
+
+    .status-badge.online {
       border-radius: 50%;
-      border: 4px solid #0f152e;
+      background: #23a55a;
+    }
+
+    .status-badge.idle {
+      border-radius: 50%;
+      background: #f0b232;
+    }
+
+    .status-badge.idle::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #11162d;
+    }
+
+    .status-badge.dnd {
+      border-radius: 50%;
+      background: #f23f43;
+    }
+
+    .status-badge.dnd::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 4px;
+      border-radius: 999px;
+      background: #fff;
+      transform: translate(-50%, -50%);
+    }
+
+    .status-badge.offline {
+      border-radius: 50%;
+      background: #80848e;
+    }
+
+    .status-badge.offline::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      background: #11162d;
+    }
+
+    .status-badge.mobile {
+      width: 26px;
+      height: 32px;
+      right: 8px;
+      bottom: 0;
+      border-radius: 9px;
+      background: #23a55a;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #747f8d;
-      overflow: hidden;
-      box-shadow: 0 0 0 3px rgba(124, 140, 255, 0.08);
-    }
-
-    .status-badge.online { background: #23a55a; }
-    .status-badge.idle { background: #f0b232; }
-    .status-badge.dnd { background: #f23f43; }
-    .status-badge.offline { background: #747f8d; }
-    .status-badge.mobile {
-      background: #23a55a;
-      border-radius: 8px;
-    }
-
-    .status-badge.mobile::before {
-      content: "📱";
+      color: white;
       font-size: 14px;
       line-height: 1;
     }
 
-    .status-badge.idle::before {
-      content: "";
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #050816;
-      position: absolute;
-      top: 2px;
-      right: 2px;
-    }
-
-    .status-badge.dnd::before {
-      content: "";
-      width: 12px;
-      height: 4px;
-      border-radius: 999px;
-      background: white;
+    .status-badge.mobile::after {
+      content: "📱";
+      transform: translateY(-1px);
     }
 
     h1, h2, h3, p { margin: 0; }
@@ -178,6 +211,134 @@
       border: none;
     }
 
+    .custom-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      color: #eef2ff;
+      font-weight: 600;
+      max-width: fit-content;
+    }
+
+    .custom-status-pill.hidden {
+      display: none;
+    }
+
+    .custom-status-emoji {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .presence-card {
+      margin-top: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .presence-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(124, 140, 255, 0.1);
+      border: 1px solid rgba(124, 140, 255, 0.22);
+      color: #dce2ff;
+      font-size: 13px;
+      font-weight: 700;
+      width: fit-content;
+    }
+
+    .presence-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #747f8d;
+    }
+
+    .presence-dot.online { background: #23a55a; }
+    .presence-dot.idle { background: #f0b232; }
+    .presence-dot.dnd { background: #f23f43; }
+    .presence-dot.offline { background: #747f8d; }
+
+    .activity-box {
+      margin-top: 4px;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(6, 10, 24, 0.35);
+      border: 1px solid rgba(124, 140, 255, 0.14);
+    }
+
+    .activity-head {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .activity-art-wrap {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+    }
+
+    .activity-art {
+      width: 72px;
+      height: 72px;
+      border-radius: 16px;
+      object-fit: cover;
+      background: rgba(255,255,255,0.06);
+      display: block;
+    }
+
+    .activity-art-small {
+      position: absolute;
+      right: -4px;
+      bottom: -4px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #11162d;
+      background: #11162d;
+    }
+
+    .activity-meta {
+      min-width: 0;
+    }
+
+    .activity-title {
+      font-weight: 800;
+      color: #eef2ff;
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    .activity-details,
+    .activity-state,
+    .activity-time {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .activity-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .activity-empty {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
     .section-title {
       font-size: clamp(24px, 3vw, 34px);
       margin-bottom: 10px;
@@ -212,96 +373,6 @@
     .card p {
       color: var(--muted);
       line-height: 1.6;
-    }
-
-    .presence-card {
-      margin-top: 16px;
-      display: grid;
-      gap: 12px;
-    }
-
-    .presence-top {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .presence-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(124, 140, 255, 0.1);
-      border: 1px solid rgba(124, 140, 255, 0.22);
-      color: #dce2ff;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .presence-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #747f8d;
-    }
-
-    .presence-dot.online { background: #23a55a; }
-    .presence-dot.idle { background: #f0b232; }
-    .presence-dot.dnd { background: #f23f43; }
-    .presence-dot.offline { background: #747f8d; }
-
-    .activity-box {
-      margin-top: 4px;
-      padding: 14px;
-      border-radius: 16px;
-      background: rgba(6, 10, 24, 0.35);
-      border: 1px solid rgba(124, 140, 255, 0.14);
-    }
-
-    .activity-head {
-      display: flex;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .activity-art {
-      width: 68px;
-      height: 68px;
-      border-radius: 14px;
-      object-fit: cover;
-      background: rgba(255,255,255,0.06);
-      flex-shrink: 0;
-    }
-
-    .activity-meta {
-      min-width: 0;
-    }
-
-    .activity-title {
-      font-weight: 800;
-      color: #eef2ff;
-      margin-bottom: 4px;
-    }
-
-    .activity-details,
-    .activity-state {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .activity-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .activity-empty {
-      color: var(--muted);
-      font-size: 14px;
     }
 
     .projects {
@@ -378,14 +449,19 @@
         text-align: center;
       }
 
-      .avatar-wrap {
+      .avatar-column {
         margin: 0 auto;
       }
 
       .btn-row,
-      .activity-buttons,
-      .presence-top {
+      .activity-buttons {
         justify-content: center;
+      }
+
+      .presence-pill,
+      .custom-status-pill {
+        margin-left: auto;
+        margin-right: auto;
       }
 
       .grid-2, .projects {
@@ -402,14 +478,20 @@
 <body>
   <div class="container hero-wrap">
     <section class="hero">
-      <div class="avatar-wrap">
+      <div class="avatar-column">
         <img class="avatar" src="./animepfp.png" alt="Profile photo">
         <div id="hero-status-badge" class="status-badge offline" title="Offline"></div>
       </div>
 
       <div>
-        <h1>fr1ev</h1>
-        <p class="subtitle">Discord bot developer, game developer, creator</p>
+        <h1 id="display-name">fr1ev</h1>
+        <p class="subtitle" id="username-line">Discord bot developer, game developer, creator</p>
+
+        <div id="custom-status-pill" class="custom-status-pill hidden">
+          <span id="custom-status-emoji" class="custom-status-emoji">🔒</span>
+          <span id="custom-status-text">FR1EV SECURITY</span>
+        </div>
+
         <p class="desc">
           I build projects, communities, bots, websites, and systems. This site is my personal hub where people can find my links, projects, and contact info.
         </p>
@@ -422,11 +504,9 @@
         </div>
 
         <div class="presence-card">
-          <div class="presence-top">
-            <div class="presence-pill">
-              <span id="presence-dot" class="presence-dot offline"></span>
-              <span id="presence-text">Loading Discord status...</span>
-            </div>
+          <div class="presence-pill">
+            <span id="presence-dot" class="presence-dot offline"></span>
+            <span id="presence-text">Loading Discord status...</span>
           </div>
 
           <div class="activity-box">
@@ -513,14 +593,29 @@
     const presenceDot = document.getElementById("presence-dot");
     const presenceText = document.getElementById("presence-text");
     const activityContent = document.getElementById("activity-content");
+    const displayName = document.getElementById("display-name");
+    const usernameLine = document.getElementById("username-line");
+    const customStatusPill = document.getElementById("custom-status-pill");
+    const customStatusEmoji = document.getElementById("custom-status-emoji");
+    const customStatusText = document.getElementById("custom-status-text");
 
     function escapeHtml(str) {
       return String(str ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
-        .replace(/\"/g, "&quot;")
+        .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+    }
+
+    function formatElapsed(ms) {
+      if (!ms) return "";
+      const seconds = Math.floor((Date.now() - ms) / 1000);
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+
+      if (h > 0) return `Elapsed: ${h}h ${m}m`;
+      return `Elapsed: ${m}m`;
     }
 
     function setStatus(status, onMobile) {
@@ -552,14 +647,48 @@
       presenceText.textContent = label;
     }
 
+    function getCustomStatus(activities) {
+      if (!Array.isArray(activities)) return null;
+      return activities.find(a => a && a.type === 4) || null;
+    }
+
     function getBestActivity(activities) {
       if (!Array.isArray(activities) || !activities.length) return null;
+      const filtered = activities.filter(a => a && a.type !== 4);
+      return filtered[0] || null;
+    }
 
-      const filtered = activities.filter(a =>
-        a && a.name && a.name !== "Custom Status"
-      );
+    function renderCustomStatus(customStatus) {
+      if (!customStatus || (!customStatus.state && !customStatus.emoji)) {
+        customStatusPill.classList.add("hidden");
+        return;
+      }
 
-      return filtered[0] || activities[0] || null;
+      customStatusPill.classList.remove("hidden");
+      customStatusEmoji.textContent = customStatus.emoji?.name || "💬";
+      customStatusText.textContent = customStatus.state || "Custom Status";
+    }
+
+    function buildActivityButtons(activity) {
+      if (!activity) return "";
+
+      const name = (activity.name || "").toLowerCase();
+      const buttons = [];
+
+      if (name.includes("ink game") || name.includes("fr1ev")) {
+        buttons.push({
+          label: "FR1EV SECURITY",
+          url: "https://fr1ev.github.io/fr1ev-security/"
+        });
+        buttons.push({
+          label: "Donate me on roblox",
+          url: "https://www.roblox.com/games/98939762642270/Notfr1evs-Place#!/store"
+        });
+      }
+
+      return buttons.map(btn =>
+        `<a class="btn" href="${escapeHtml(btn.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(btn.label)}</a>`
+      ).join("");
     }
 
     function renderActivity(activity) {
@@ -571,38 +700,41 @@
       const title = activity.name || "Unknown Activity";
       const details = activity.details || "";
       const state = activity.state || "";
-      const buttons = Array.isArray(activity.buttons) ? activity.buttons : [];
+      const elapsed = formatElapsed(activity.timestamps?.start);
 
-      let imageUrl = "";
       const assets = activity.assets || {};
+      let largeImageUrl = "";
+      let smallImageUrl = "";
 
       if (assets.large_image) {
         if (assets.large_image.startsWith("mp:external/")) {
-          imageUrl = "https://media.discordapp.net/" + assets.large_image.replace("mp:", "");
+          largeImageUrl = "https://media.discordapp.net/" + assets.large_image.replace("mp:", "");
         } else if (activity.application_id) {
-          imageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${assets.large_image}.png`;
+          largeImageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${assets.large_image}.png`;
         }
       }
 
-      const buttonHtml = buttons.map((btn, i) => {
-        const label = typeof btn === "string" ? btn : btn?.label;
-        const url = typeof btn === "object" ? btn.url : null;
-
-        if (!label) return "";
-        if (!url) {
-          return `<span class="btn">${escapeHtml(label)}</span>`;
+      if (assets.small_image) {
+        if (assets.small_image.startsWith("mp:external/")) {
+          smallImageUrl = "https://media.discordapp.net/" + assets.small_image.replace("mp:", "");
+        } else if (activity.application_id) {
+          smallImageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${assets.small_image}.png`;
         }
+      }
 
-        return `<a class="btn" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
-      }).join("");
+      const buttonHtml = buildActivityButtons(activity);
 
       activityContent.innerHTML = `
         <div class="activity-head">
-          ${imageUrl ? `<img class="activity-art" src="${escapeHtml(imageUrl)}" alt="Activity art">` : `<div class="activity-art"></div>`}
+          <div class="activity-art-wrap">
+            ${largeImageUrl ? `<img class="activity-art" src="${escapeHtml(largeImageUrl)}" alt="Activity art">` : `<div class="activity-art"></div>`}
+            ${smallImageUrl ? `<img class="activity-art-small" src="${escapeHtml(smallImageUrl)}" alt="Small activity art">` : ``}
+          </div>
           <div class="activity-meta">
             <div class="activity-title">${escapeHtml(title)}</div>
             ${details ? `<div class="activity-details">${escapeHtml(details)}</div>` : ""}
             ${state ? `<div class="activity-state">${escapeHtml(state)}</div>` : ""}
+            ${elapsed ? `<div class="activity-time">${escapeHtml(elapsed)}</div>` : ""}
           </div>
         </div>
         ${buttonHtml ? `<div class="activity-buttons">${buttonHtml}</div>` : ""}
@@ -619,14 +751,21 @@
         }
 
         const data = json.data;
+        const user = data.discord_user || {};
         const status = data.discord_status || "offline";
         const onMobile = !!data.active_on_discord_mobile;
+
+        const customStatus = getCustomStatus(data.activities);
         const activity = getBestActivity(data.activities);
 
+        displayName.textContent = user.display_name || user.global_name || user.username || "fr1ev";
+        usernameLine.textContent = `${user.username || "notfr1ev"} • live discord presence`;
         setStatus(status, onMobile);
+        renderCustomStatus(customStatus);
         renderActivity(activity);
       } catch (err) {
         setStatus("offline", false);
+        customStatusPill.classList.add("hidden");
         activityContent.innerHTML = '<div class="activity-empty">Could not load Discord activity yet.</div>';
       }
     }
