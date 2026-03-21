@@ -11,8 +11,6 @@
   <style>
     :root {
       --bg: #050816;
-      --bg-2: #0b1023;
-      --card: rgba(20, 28, 61, 0.72);
       --stroke: rgba(121, 144, 255, 0.24);
       --text: #eef2ff;
       --muted: #a8b1d8;
@@ -81,7 +79,6 @@
       background: #0f152e;
     }
 
-    /* Vencord-like status badge */
     .status-badge {
       position: absolute;
       right: 8px;
@@ -249,28 +246,30 @@
 
     .profile-badge {
       position: relative;
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(180deg, rgba(124, 140, 255, 0.18), rgba(124, 140, 255, 0.08));
-      border: 1px solid rgba(124, 140, 255, 0.28);
+      background: linear-gradient(180deg, rgba(124, 140, 255, 0.16), rgba(124, 140, 255, 0.08));
+      border: 1px solid rgba(124, 140, 255, 0.26);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
       cursor: default;
       transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
     }
 
-    .profile-badge span {
-      font-size: 16px;
-      line-height: 1;
-    }
-
     .profile-badge:hover {
       transform: translateY(-2px);
-      background: linear-gradient(180deg, rgba(124, 140, 255, 0.28), rgba(124, 140, 255, 0.14));
+      background: linear-gradient(180deg, rgba(124, 140, 255, 0.26), rgba(124, 140, 255, 0.14));
       box-shadow: 0 12px 28px rgba(89, 104, 255, 0.18);
+    }
+
+    .profile-badge img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      display: block;
     }
 
     .founder-badge {
@@ -279,8 +278,14 @@
     }
 
     .founder-badge:hover {
-      background: linear-gradient(180deg, rgba(255, 188, 92, 0.3), rgba(255, 140, 66, 0.18));
+      background: linear-gradient(180deg, rgba(255, 188, 92, 0.32), rgba(255, 140, 66, 0.18));
       box-shadow: 0 12px 28px rgba(255, 170, 90, 0.18);
+    }
+
+    .founder-badge img {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
     }
 
     .profile-badge::after {
@@ -579,13 +584,29 @@
         <p class="subtitle" id="username-line">Discord bot developer, game developer, creator</p>
 
         <div class="badge-row">
-          <div class="profile-badge" data-tooltip="Active Developer"><span>⚡</span></div>
-          <div class="profile-badge" data-tooltip="Discord Staff"><span>🛠️</span></div>
-          <div class="profile-badge" data-tooltip="Discord Partner"><span>🤝</span></div>
-          <div class="profile-badge" data-tooltip="Early Verified Bot Developer"><span>🤖</span></div>
-          <div class="profile-badge" data-tooltip="HypeSquad Events"><span>🎉</span></div>
-          <div class="profile-badge" data-tooltip="Bug Hunter Level 2"><span>🐞</span></div>
-          <div class="profile-badge founder-badge" data-tooltip="FR1EV SECURITY Creator / Founder"><span>🔒</span></div>
+          <div class="profile-badge founder-badge" data-tooltip="FR1EV SECURITY Creator / Founder">
+            <img src="./favicon.ico" alt="FR1EV SECURITY Creator / Founder">
+          </div>
+
+          <div class="profile-badge" data-tooltip="Discord Staff">
+            <img src="https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/discordstaff.svg" alt="Discord Staff">
+          </div>
+
+          <div class="profile-badge" data-tooltip="Early Verified Bot Developer">
+            <img src="https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/discordbotdev.svg" alt="Early Verified Bot Developer">
+          </div>
+
+          <div class="profile-badge" data-tooltip="Bug Hunter Level 2">
+            <img src="https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/discordbughunter2.svg" alt="Bug Hunter Level 2">
+          </div>
+
+          <div class="profile-badge" data-tooltip="HypeSquad Events">
+            <img src="https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/hypesquadevents.svg" alt="HypeSquad Events">
+          </div>
+
+          <div class="profile-badge" data-tooltip="Active Developer">
+            <img src="https://raw.githubusercontent.com/mezotv/discord-badges/main/assets/activedeveloper.svg" alt="Active Developer">
+          </div>
         </div>
 
         <div id="custom-status-pill" class="custom-status-pill hidden">
