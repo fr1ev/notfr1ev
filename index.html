@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name | Portfolio</title>
+  <title>fr1ev | Portfolio</title>
   <meta name="description" content="Personal portfolio and links" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +60,12 @@
       backdrop-filter: blur(12px);
     }
 
+    .avatar-wrap {
+      position: relative;
+      width: 96px;
+      height: 96px;
+    }
+
     .avatar {
       width: 96px;
       height: 96px;
@@ -67,6 +73,57 @@
       object-fit: cover;
       border: 3px solid rgba(124, 140, 255, 0.35);
       box-shadow: 0 0 0 6px rgba(124, 140, 255, 0.08);
+      display: block;
+    }
+
+    .status-badge {
+      position: absolute;
+      right: -2px;
+      bottom: -2px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 4px solid #0f152e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #747f8d;
+      overflow: hidden;
+      box-shadow: 0 0 0 3px rgba(124, 140, 255, 0.08);
+    }
+
+    .status-badge.online { background: #23a55a; }
+    .status-badge.idle { background: #f0b232; }
+    .status-badge.dnd { background: #f23f43; }
+    .status-badge.offline { background: #747f8d; }
+    .status-badge.mobile {
+      background: #23a55a;
+      border-radius: 8px;
+    }
+
+    .status-badge.mobile::before {
+      content: "📱";
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .status-badge.idle::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #050816;
+      position: absolute;
+      top: 2px;
+      right: 2px;
+    }
+
+    .status-badge.dnd::before {
+      content: "";
+      width: 12px;
+      height: 4px;
+      border-radius: 999px;
+      background: white;
     }
 
     h1, h2, h3, p { margin: 0; }
@@ -157,6 +214,96 @@
       line-height: 1.6;
     }
 
+    .presence-card {
+      margin-top: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .presence-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .presence-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(124, 140, 255, 0.1);
+      border: 1px solid rgba(124, 140, 255, 0.22);
+      color: #dce2ff;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .presence-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #747f8d;
+    }
+
+    .presence-dot.online { background: #23a55a; }
+    .presence-dot.idle { background: #f0b232; }
+    .presence-dot.dnd { background: #f23f43; }
+    .presence-dot.offline { background: #747f8d; }
+
+    .activity-box {
+      margin-top: 4px;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(6, 10, 24, 0.35);
+      border: 1px solid rgba(124, 140, 255, 0.14);
+    }
+
+    .activity-head {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .activity-art {
+      width: 68px;
+      height: 68px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: rgba(255,255,255,0.06);
+      flex-shrink: 0;
+    }
+
+    .activity-meta {
+      min-width: 0;
+    }
+
+    .activity-title {
+      font-weight: 800;
+      color: #eef2ff;
+      margin-bottom: 4px;
+    }
+
+    .activity-details,
+    .activity-state {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .activity-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .activity-empty {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
     .projects {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -231,16 +378,23 @@
         text-align: center;
       }
 
-      .avatar {
+      .avatar-wrap {
         margin: 0 auto;
       }
 
-      .btn-row {
+      .btn-row,
+      .activity-buttons,
+      .presence-top {
         justify-content: center;
       }
 
       .grid-2, .projects {
         grid-template-columns: 1fr;
+      }
+
+      .activity-head {
+        flex-direction: column;
+        text-align: center;
       }
     }
   </style>
@@ -248,18 +402,36 @@
 <body>
   <div class="container hero-wrap">
     <section class="hero">
-      <img class="avatar" src="./animepfp.png" alt="Profile photo">
+      <div class="avatar-wrap">
+        <img class="avatar" src="./animepfp.png" alt="Profile photo">
+        <div id="hero-status-badge" class="status-badge offline" title="Offline"></div>
+      </div>
+
       <div>
-        <h1>Your Name</h1>
+        <h1>fr1ev</h1>
         <p class="subtitle">Discord bot developer, game developer, creator</p>
         <p class="desc">
           I build projects, communities, bots, websites, and systems. This site is my personal hub where people can find my links, projects, and contact info.
         </p>
+
         <div class="btn-row">
-          <a class="btn primary" href="https://discord.gg/Bd7fEsTHNJ" target="_blank">Discord Server</a>
+          <a class="btn primary" href="https://discord.gg/Bd7fEsTHNJ" target="_blank" rel="noopener noreferrer">Discord Server</a>
           <a class="btn" href="#projects">Projects</a>
           <a class="btn" href="mailto:you@example.com">Contact</a>
-          <a class="btn" href="https://github.com/fr1ev" target="_blank">GitHub</a>
+          <a class="btn" href="https://github.com/fr1ev" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+
+        <div class="presence-card">
+          <div class="presence-top">
+            <div class="presence-pill">
+              <span id="presence-dot" class="presence-dot offline"></span>
+              <span id="presence-text">Loading Discord status...</span>
+            </div>
+          </div>
+
+          <div class="activity-box">
+            <div id="activity-content" class="activity-empty">Loading current activity...</div>
+          </div>
         </div>
       </div>
     </section>
@@ -333,5 +505,134 @@
   <footer>
     © 2026 fr1ev. Built with HTML/CSS and hosted on GitHub Pages.
   </footer>
+
+  <script>
+    const DISCORD_USER_ID = "1172933780705648673";
+
+    const heroStatusBadge = document.getElementById("hero-status-badge");
+    const presenceDot = document.getElementById("presence-dot");
+    const presenceText = document.getElementById("presence-text");
+    const activityContent = document.getElementById("activity-content");
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/\"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function setStatus(status, onMobile) {
+      const normalized = status || "offline";
+
+      heroStatusBadge.className = "status-badge";
+      presenceDot.className = "presence-dot";
+
+      if (onMobile && normalized === "online") {
+        heroStatusBadge.classList.add("mobile");
+        heroStatusBadge.title = "Online on mobile";
+        presenceDot.classList.add("online");
+        presenceText.textContent = "Online on mobile";
+        return;
+      }
+
+      heroStatusBadge.classList.add(normalized);
+      presenceDot.classList.add(normalized);
+
+      const labelMap = {
+        online: "Online",
+        idle: "Idle",
+        dnd: "Do Not Disturb",
+        offline: "Offline"
+      };
+
+      const label = labelMap[normalized] || "Offline";
+      heroStatusBadge.title = label;
+      presenceText.textContent = label;
+    }
+
+    function getBestActivity(activities) {
+      if (!Array.isArray(activities) || !activities.length) return null;
+
+      const filtered = activities.filter(a =>
+        a && a.name && a.name !== "Custom Status"
+      );
+
+      return filtered[0] || activities[0] || null;
+    }
+
+    function renderActivity(activity) {
+      if (!activity) {
+        activityContent.innerHTML = '<div class="activity-empty">No current activity right now.</div>';
+        return;
+      }
+
+      const title = activity.name || "Unknown Activity";
+      const details = activity.details || "";
+      const state = activity.state || "";
+      const buttons = Array.isArray(activity.buttons) ? activity.buttons : [];
+
+      let imageUrl = "";
+      const assets = activity.assets || {};
+
+      if (assets.large_image) {
+        if (assets.large_image.startsWith("mp:external/")) {
+          imageUrl = "https://media.discordapp.net/" + assets.large_image.replace("mp:", "");
+        } else if (activity.application_id) {
+          imageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${assets.large_image}.png`;
+        }
+      }
+
+      const buttonHtml = buttons.map((btn, i) => {
+        const label = typeof btn === "string" ? btn : btn?.label;
+        const url = typeof btn === "object" ? btn.url : null;
+
+        if (!label) return "";
+        if (!url) {
+          return `<span class="btn">${escapeHtml(label)}</span>`;
+        }
+
+        return `<a class="btn" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+      }).join("");
+
+      activityContent.innerHTML = `
+        <div class="activity-head">
+          ${imageUrl ? `<img class="activity-art" src="${escapeHtml(imageUrl)}" alt="Activity art">` : `<div class="activity-art"></div>`}
+          <div class="activity-meta">
+            <div class="activity-title">${escapeHtml(title)}</div>
+            ${details ? `<div class="activity-details">${escapeHtml(details)}</div>` : ""}
+            ${state ? `<div class="activity-state">${escapeHtml(state)}</div>` : ""}
+          </div>
+        </div>
+        ${buttonHtml ? `<div class="activity-buttons">${buttonHtml}</div>` : ""}
+      `;
+    }
+
+    async function loadPresence() {
+      try {
+        const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
+        const json = await res.json();
+
+        if (!json.success || !json.data) {
+          throw new Error("Presence unavailable");
+        }
+
+        const data = json.data;
+        const status = data.discord_status || "offline";
+        const onMobile = !!data.active_on_discord_mobile;
+        const activity = getBestActivity(data.activities);
+
+        setStatus(status, onMobile);
+        renderActivity(activity);
+      } catch (err) {
+        setStatus("offline", false);
+        activityContent.innerHTML = '<div class="activity-empty">Could not load Discord activity yet.</div>';
+      }
+    }
+
+    loadPresence();
+    setInterval(loadPresence, 15000);
+  </script>
 </body>
 </html>
