@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>fr1ev | Portfolio</title>
-  <meta name="description" content="Personal portfolio and links" />
+  <meta name="description" content="fr1ev portfolio and links" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #050816;
+      --bg-2: #0b1023;
       --card: rgba(20, 28, 61, 0.72);
       --stroke: rgba(121, 144, 255, 0.24);
       --text: #eef2ff;
@@ -20,6 +21,9 @@
       --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
       --radius: 22px;
       --max: 1080px;
+      --panel: linear-gradient(180deg, rgba(15, 21, 46, 0.92), rgba(10, 15, 36, 0.9));
+      --panel-2: linear-gradient(180deg, rgba(23, 31, 68, 0.9), rgba(17, 24, 52, 0.9));
+      --discord-bg: #11162d;
     }
 
     * { box-sizing: border-box; }
@@ -52,7 +56,7 @@
       grid-template-columns: 120px 1fr;
       gap: 22px;
       align-items: start;
-      background: linear-gradient(180deg, rgba(15, 21, 46, 0.92), rgba(10, 15, 36, 0.9));
+      background: var(--panel);
       border: 1px solid var(--stroke);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -74,6 +78,7 @@
       border: 3px solid rgba(124, 140, 255, 0.35);
       box-shadow: 0 0 0 6px rgba(124, 140, 255, 0.08);
       display: block;
+      background: #0f152e;
     }
 
     /* Vencord-like status badge */
@@ -83,7 +88,7 @@
       bottom: 2px;
       width: 28px;
       height: 28px;
-      border: 5px solid #11162d;
+      border: 5px solid var(--discord-bg);
       box-shadow: 0 0 0 3px rgba(124, 140, 255, 0.08);
       background: #80848e;
     }
@@ -106,7 +111,7 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: #11162d;
+      background: var(--discord-bg);
     }
 
     .status-badge.dnd {
@@ -122,7 +127,7 @@
       width: 12px;
       height: 4px;
       border-radius: 999px;
-      background: #fff;
+      background: white;
       transform: translate(-50%, -50%);
     }
 
@@ -136,7 +141,7 @@
       position: absolute;
       inset: 5px;
       border-radius: 50%;
-      background: #11162d;
+      background: var(--discord-bg);
     }
 
     .status-badge.mobile {
@@ -234,6 +239,91 @@
       line-height: 1;
     }
 
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+      margin-bottom: 4px;
+    }
+
+    .profile-badge {
+      position: relative;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(124, 140, 255, 0.18), rgba(124, 140, 255, 0.08));
+      border: 1px solid rgba(124, 140, 255, 0.28);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      cursor: default;
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+    }
+
+    .profile-badge span {
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .profile-badge:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(180deg, rgba(124, 140, 255, 0.28), rgba(124, 140, 255, 0.14));
+      box-shadow: 0 12px 28px rgba(89, 104, 255, 0.18);
+    }
+
+    .founder-badge {
+      background: linear-gradient(180deg, rgba(255, 188, 92, 0.22), rgba(255, 140, 66, 0.12));
+      border: 1px solid rgba(255, 188, 92, 0.35);
+    }
+
+    .founder-badge:hover {
+      background: linear-gradient(180deg, rgba(255, 188, 92, 0.3), rgba(255, 140, 66, 0.18));
+      box-shadow: 0 12px 28px rgba(255, 170, 90, 0.18);
+    }
+
+    .profile-badge::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      transform: translateX(-50%) translateY(6px);
+      background: rgba(10, 14, 28, 0.96);
+      color: #eef2ff;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(124, 140, 255, 0.22);
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .16s ease, transform .16s ease;
+      z-index: 50;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .profile-badge::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 4px);
+      transform: translateX(-50%) translateY(6px);
+      border: 6px solid transparent;
+      border-top-color: rgba(10, 14, 28, 0.96);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .16s ease, transform .16s ease;
+      z-index: 49;
+    }
+
+    .profile-badge:hover::after,
+    .profile-badge:hover::before {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     .presence-card {
       margin-top: 18px;
       display: grid;
@@ -304,8 +394,8 @@
       height: 28px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #11162d;
-      background: #11162d;
+      border: 3px solid var(--discord-bg);
+      background: var(--discord-bg);
     }
 
     .activity-meta {
@@ -358,7 +448,7 @@
     }
 
     .card {
-      background: linear-gradient(180deg, rgba(23, 31, 68, 0.9), rgba(17, 24, 52, 0.9));
+      background: var(--panel-2);
       border: 1px solid var(--stroke);
       border-radius: 18px;
       padding: 18px;
@@ -454,7 +544,8 @@
       }
 
       .btn-row,
-      .activity-buttons {
+      .activity-buttons,
+      .badge-row {
         justify-content: center;
       }
 
@@ -487,6 +578,16 @@
         <h1 id="display-name">fr1ev</h1>
         <p class="subtitle" id="username-line">Discord bot developer, game developer, creator</p>
 
+        <div class="badge-row">
+          <div class="profile-badge" data-tooltip="Active Developer"><span>⚡</span></div>
+          <div class="profile-badge" data-tooltip="Discord Staff"><span>🛠️</span></div>
+          <div class="profile-badge" data-tooltip="Discord Partner"><span>🤝</span></div>
+          <div class="profile-badge" data-tooltip="Early Verified Bot Developer"><span>🤖</span></div>
+          <div class="profile-badge" data-tooltip="HypeSquad Events"><span>🎉</span></div>
+          <div class="profile-badge" data-tooltip="Bug Hunter Level 2"><span>🐞</span></div>
+          <div class="profile-badge founder-badge" data-tooltip="FR1EV SECURITY Creator / Founder"><span>🔒</span></div>
+        </div>
+
         <div id="custom-status-pill" class="custom-status-pill hidden">
           <span id="custom-status-emoji" class="custom-status-emoji">🔒</span>
           <span id="custom-status-text">FR1EV SECURITY</span>
@@ -499,7 +600,7 @@
         <div class="btn-row">
           <a class="btn primary" href="https://discord.gg/Bd7fEsTHNJ" target="_blank" rel="noopener noreferrer">Discord Server</a>
           <a class="btn" href="#projects">Projects</a>
-          <a class="btn" href="mailto:you@example.com">Contact</a>
+          <a class="btn" href="mailto:notfrev@gmail.com">Contact</a>
           <a class="btn" href="https://github.com/fr1ev" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
 
@@ -613,7 +714,6 @@
       const seconds = Math.floor((Date.now() - ms) / 1000);
       const h = Math.floor(seconds / 3600);
       const m = Math.floor((seconds % 3600) / 60);
-
       if (h > 0) return `Elapsed: ${h}h ${m}m`;
       return `Elapsed: ${m}m`;
     }
@@ -669,26 +769,11 @@
       customStatusText.textContent = customStatus.state || "Custom Status";
     }
 
-    function buildActivityButtons(activity) {
-      if (!activity) return "";
-
-      const name = (activity.name || "").toLowerCase();
-      const buttons = [];
-
-      if (name.includes("ink game") || name.includes("fr1ev")) {
-        buttons.push({
-          label: "FR1EV SECURITY",
-          url: "https://fr1ev.github.io/fr1ev-security/"
-        });
-        buttons.push({
-          label: "Donate me on roblox",
-          url: "https://www.roblox.com/games/98939762642270/Notfr1evs-Place#!/store"
-        });
-      }
-
-      return buttons.map(btn =>
-        `<a class="btn" href="${escapeHtml(btn.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(btn.label)}</a>`
-      ).join("");
+    function buildActivityButtons() {
+      return `
+        <a class="btn" href="https://fr1ev.github.io/fr1ev-security/" target="_blank" rel="noopener noreferrer">FR1EV SECURITY</a>
+        <a class="btn" href="https://www.roblox.com/games/98939762642270/Notfr1evs-Place#!/store" target="_blank" rel="noopener noreferrer">Donate me on roblox</a>
+      `;
     }
 
     function renderActivity(activity) {
@@ -722,7 +807,7 @@
         }
       }
 
-      const buttonHtml = buildActivityButtons(activity);
+      const buttonHtml = buildActivityButtons();
 
       activityContent.innerHTML = `
         <div class="activity-head">
@@ -737,7 +822,7 @@
             ${elapsed ? `<div class="activity-time">${escapeHtml(elapsed)}</div>` : ""}
           </div>
         </div>
-        ${buttonHtml ? `<div class="activity-buttons">${buttonHtml}</div>` : ""}
+        <div class="activity-buttons">${buttonHtml}</div>
       `;
     }
 
@@ -760,6 +845,7 @@
 
         displayName.textContent = user.display_name || user.global_name || user.username || "fr1ev";
         usernameLine.textContent = `${user.username || "notfr1ev"} • live discord presence`;
+
         setStatus(status, onMobile);
         renderCustomStatus(customStatus);
         renderActivity(activity);
